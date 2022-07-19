@@ -14,18 +14,19 @@ class BluetoothData(SensorData):
     """Update bluetooth data."""
 
     @abstractmethod
-    def update(self, data: BluetoothServiceInfo) -> None:
+    def _start_update(self, data: BluetoothServiceInfo) -> None:
         """Update the data."""
 
     def supported(self, data: BluetoothServiceInfo) -> bool:
         """Return True if the device is supported."""
-        self.generate_update(data)
+        self._start_update(data)
         return bool(self._device_id_to_type)
 
-    def generate_update(self, data: BluetoothServiceInfo) -> SensorUpdate:
-        """Update a bluetooth device."""
+    def update(self, data: BluetoothServiceInfo) -> SensorUpdate:
+        """Update a device."""
+        self._start_update(data)
         self.update_rssi(data.rssi)
-        return super().generate_update(data)
+        return self._finish_update()
 
     def update_rssi(self, native_value: int | float) -> None:
         """Quick update for an rssi sensor."""
