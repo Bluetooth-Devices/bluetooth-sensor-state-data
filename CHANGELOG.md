@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.0 (2022-07-19)
+### Feature
+* Rename rssi to signal strength ([#6](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/6)) ([`46ce6ee`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/46ce6ee4e8d27dbd94135ac1b86d7c613d71bddd))
+
 ## v1.3.0 (2022-07-19)
 ### Feature
 * Add rssi key ([#5](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/5)) ([`f96b436`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/f96b4366b43b7e5f96c0be9ad4062ed72ac1c0a5))
