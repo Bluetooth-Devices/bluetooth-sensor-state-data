@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.3.0 (2022-07-19)
+### Feature
+* Add rssi key ([#5](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/5)) ([`f96b436`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/f96b4366b43b7e5f96c0be9ad4062ed72ac1c0a5))
+
 ## v1.2.1 (2022-07-19)
 ### Fix
 * Fix rssi sensor when there is more than one device ([#4](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/4)) ([`0f79fc7`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/0f79fc73b69ebf4f2e9f9d37690fead21b2a44bb))
