@@ -29,15 +29,15 @@ class BluetoothData(SensorData):
     def update(self, data: BluetoothServiceInfo) -> SensorUpdate:
         """Update a device."""
         self._start_update(data)
-        self.update_rssi(data.rssi)
+        self.update_signal_strength(data.rssi)
         return self._finish_update()
 
-    def update_rssi(self, native_value: int | float) -> None:
-        """Quick update for an rssi sensor."""
-        self.update_sensor(
-            key=RSSI_KEY,
-            native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
-            native_value=native_value,
-            device_class=DeviceClass.SIGNAL_STRENGTH,
-            device_id=self.primary_device_id,
-        )
+    def update_signal_strength(self, native_value: int | float) -> None:
+        """Quick update for an signal strength sensor."""
+        for device_id in self._device_id_to_type:
+            self.update_sensor(
+                native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+                native_value=native_value,
+                device_class=DeviceClass.SIGNAL_STRENGTH,
+                device_id=device_id,
+            )
