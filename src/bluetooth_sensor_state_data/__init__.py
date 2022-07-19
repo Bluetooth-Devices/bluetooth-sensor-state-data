@@ -5,13 +5,12 @@ __version__ = "1.4.1"
 from abc import abstractmethod
 
 from home_assistant_bluetooth import BluetoothServiceInfo
-from sensor_state_data import SensorUpdate
-from sensor_state_data.data import DeviceClass, SensorData
+from sensor_state_data import DeviceClass, SensorData, SensorUpdate
 from sensor_state_data.units import SIGNAL_STRENGTH_DECIBELS_MILLIWATT
 
 SIGNAL_STRENGTH_KEY = DeviceClass.SIGNAL_STRENGTH.value
 
-__all__ = ["BluetoothData", "SIGNAL_STRENGTH"]
+__all__ = ["BluetoothData", "SIGNAL_STRENGTH_KEY"]
 
 
 class BluetoothData(SensorData):
