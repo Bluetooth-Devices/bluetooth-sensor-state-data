@@ -35,4 +35,5 @@ class BluetoothData(SensorData):
             native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
             native_value=native_value,
             device_class=DeviceClass.SIGNAL_STRENGTH,
+            device_id=self.primary_device_id,
         )
