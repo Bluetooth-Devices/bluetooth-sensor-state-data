@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.4.4 (2022-07-19)
+### Fix
+* Fix ci ([#11](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/11)) ([`591e4a7`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/591e4a726a2b69b82d5cf2161bedd906cda154ea))
+
 ## v1.4.2 (2022-07-19)
 ### Fix
 * Fix export of SIGNAL_STRENGTH_KEY ([#8](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/8)) ([`ceee951`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/ceee95163bb2911f9472abe4e9d109f56fe21a67))
