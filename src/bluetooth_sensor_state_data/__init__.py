@@ -9,6 +9,10 @@ from sensor_state_data import SensorUpdate
 from sensor_state_data.data import DeviceClass, SensorData
 from sensor_state_data.units import SIGNAL_STRENGTH_DECIBELS_MILLIWATT
 
+RSSI_KEY = "rssi"
+
+__all__ = ["BluetoothData", "RSSI_KEY"]
+
 
 class BluetoothData(SensorData):
     """Update bluetooth data."""
@@ -31,7 +35,7 @@ class BluetoothData(SensorData):
     def update_rssi(self, native_value: int | float) -> None:
         """Quick update for an rssi sensor."""
         self.update_sensor(
-            key="rssi",
+            key=RSSI_KEY,
             native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
             native_value=native_value,
             device_class=DeviceClass.SIGNAL_STRENGTH,
