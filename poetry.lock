@@ -424,7 +424,7 @@ use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "sensor-state-data"
-version = "1.11.0"
+version = "1.11.1"
 description = "Models for storing and converting Sensor Data state"
 category = "main"
 optional = false
@@ -606,7 +606,7 @@ docs = ["myst-parser", "Sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "d170e2b750d0b37556e18d2957e37a81a1ed34a0dd5197c0b6705cecda90b643"
+content-hash = "5d4e9d0b24d93700b573f89a57993b7506bf65dc8b741546297e9d5301082bcf"
 
 [metadata.files]
 alabaster = [
@@ -889,8 +889,8 @@ requests = [
     {file = "requests-2.28.1.tar.gz", hash = "sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983"},
 ]
 sensor-state-data = [
-    {file = "sensor-state-data-1.11.0.tar.gz", hash = "sha256:50593d6194cc32e8df3e85dcdb1f271797162e24488e980402b43c28e5b4ab8d"},
-    {file = "sensor_state_data-1.11.0-py3-none-any.whl", hash = "sha256:7714f455fae5e38b9bf707274ddf70ce91435e8c2c2af196fd187d95dc920117"},
+    {file = "sensor-state-data-1.11.1.tar.gz", hash = "sha256:a008769ba324e77ae1b316458b2eb658fc0719bacba53bfdabfa6db25368f29a"},
+    {file = "sensor_state_data-1.11.1-py3-none-any.whl", hash = "sha256:64355defc16fb11f38c767ceae2eb064f59b229164e17cd0fa818175cdca85da"},
 ]
 snowballstemmer = [
     {file = "snowballstemmer-2.2.0-py2.py3-none-any.whl", hash = "sha256:c8e1716e83cc398ae16824e5572ae04e0d9fc2c6b985fb0f900f5f0c96ecba1a"},
