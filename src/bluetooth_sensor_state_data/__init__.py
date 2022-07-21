@@ -5,8 +5,7 @@ __version__ = "1.4.6"
 from abc import abstractmethod
 
 from home_assistant_bluetooth import BluetoothServiceInfo
-from sensor_state_data import DeviceClass, SensorData, SensorUpdate
-from sensor_state_data.units import SIGNAL_STRENGTH_DECIBELS_MILLIWATT
+from sensor_state_data import DeviceClass, SensorData, SensorUpdate, Units
 
 SIGNAL_STRENGTH_KEY = DeviceClass.SIGNAL_STRENGTH.value
 
@@ -36,7 +35,7 @@ class BluetoothData(SensorData):
         for device_id in self._device_id_to_type:
             self.update_sensor(
                 key=DeviceClass.SIGNAL_STRENGTH.value,
-                native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
+                native_unit_of_measurement=Units.SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
                 native_value=native_value,
                 device_class=DeviceClass.SIGNAL_STRENGTH,
                 device_id=device_id,
