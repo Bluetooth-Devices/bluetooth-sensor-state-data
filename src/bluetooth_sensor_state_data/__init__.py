@@ -21,7 +21,7 @@ class BluetoothData(SensorData):
 
     def supported(self, data: BluetoothServiceInfo) -> bool:
         """Return True if the device is supported."""
-        self._start_update(data)
+        self.update(data)
         return bool(self._device_id_to_type)
 
     def update(self, data: BluetoothServiceInfo) -> SensorUpdate:
