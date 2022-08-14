@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.0 (2022-08-14)
+### Feature
+* Add changed_manufacturer_data function ([#14](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/14)) ([`554608b`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/554608b708b46b94b422512d6778574d8766c762))
+
 ## v1.5.0 (2022-07-21)
 ### Feature
 * Refactor to use sensor-state-data 2 ([#13](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/13)) ([`53afe59`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/53afe5952dfbe8070d80d5cd729346a8d62d646e))
