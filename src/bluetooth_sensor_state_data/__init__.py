@@ -18,7 +18,9 @@ class BluetoothData(SensorData):
     def __init__(self) -> None:
         """Initialize the class."""
         super().__init__()
-        self._last_manufacturer_data_set: set[tuple[int, bytes]] = set()
+        self._last_manufacturer_data_set_by_source: dict[
+            str, set[tuple[int, bytes]]
+        ] = {}
 
     def changed_manufacturer_data(
         self, data: BluetoothServiceInfo, exclude_ids: set[int] | None = None
@@ -29,8 +31,11 @@ class BluetoothData(SensorData):
         be called once per update.
         """
         manufacturer_data = data.manufacturer_data
+        source = data.source
 
-        last_manufacturer_data_set = self._last_manufacturer_data_set
+        last_manufacturer_data_set = (
+            self._last_manufacturer_data_set_by_source.setdefault(source, set())
+        )
         if exclude_ids:
             # If there are specific manufacturer data IDs to exclude,
             # then remove them from the set of manufacturer data.
@@ -41,7 +46,7 @@ class BluetoothData(SensorData):
             }
         else:
             manufacturer_data_set = set(manufacturer_data.items())
-        self._last_manufacturer_data_set = manufacturer_data_set
+        self._last_manufacturer_data_set_by_source[source] = manufacturer_data_set
 
         if not last_manufacturer_data_set:
             # If there is no previous data and there is only one value
