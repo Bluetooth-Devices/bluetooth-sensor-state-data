@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.1 (2023-02-06)
+### Fix
+* Make changed_manufacturer_data aware of multiple sources ([#15](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/15)) ([`91206b5`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/91206b59745847714d3e366f2983c8b1f5ce65b0))
+* Update isort to fix CI ([#16](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/16)) ([`38ccc5a`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/38ccc5a5bbc6aedb3a5fa04ec1db1a7d5afaf920))
+
 ## v1.6.0 (2022-08-14)
 ### Feature
 * Add changed_manufacturer_data function ([#14](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/14)) ([`554608b`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/554608b708b46b94b422512d6778574d8766c762))
