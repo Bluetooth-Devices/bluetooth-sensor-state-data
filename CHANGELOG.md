@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.6.2 (2023-07-07)
+
+### Fix
+
+* Ensure events are only kept for a single update cycle ([#18](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/18)) ([`907172c`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/907172c9c0320f9b17463a605f42add48688d43d))
+
 ## v1.6.1 (2023-02-06)
 ### Fix
 * Make changed_manufacturer_data aware of multiple sources ([#15](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/15)) ([`91206b5`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/91206b59745847714d3e366f2983c8b1f5ce65b0))
