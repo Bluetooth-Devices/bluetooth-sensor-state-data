@@ -68,6 +68,10 @@ class BluetoothData(SensorData):
 
     def update(self, data: BluetoothServiceInfo) -> SensorUpdate:
         """Update a device."""
+        # Ensure events from previous
+        # updates are not carried over
+        # as events are transient.
+        self._events_updates.clear()
         self._start_update(data)
         self.update_signal_strength(data.rssi)
         return self._finish_update()
