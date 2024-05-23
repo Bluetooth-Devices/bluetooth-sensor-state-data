@@ -18,9 +18,7 @@ class BluetoothData(SensorData):
     def __init__(self) -> None:
         """Initialize the class."""
         super().__init__()
-        self._last_manufacturer_data_set_by_source: dict[
-            str, set[tuple[int, bytes]]
-        ] = {}
+        self._last_manufacturer_data_by_source: dict[str, dict[int, bytes]] = {}
 
     def changed_manufacturer_data(
         self, data: BluetoothServiceInfo, exclude_ids: set[int] | None = None
@@ -32,30 +30,27 @@ class BluetoothData(SensorData):
         """
         manufacturer_data = data.manufacturer_data
         source = data.source
+        last_manufacturer_data = self._last_manufacturer_data_by_source.get(source)
 
-        last_manufacturer_data_set = (
-            self._last_manufacturer_data_set_by_source.setdefault(source, set())
-        )
         if exclude_ids:
             # If there are specific manufacturer data IDs to exclude,
             # then remove them from the set of manufacturer data.
-            manufacturer_data_set = {
-                key_val
-                for key_val in manufacturer_data.items()
-                if key_val[0] not in exclude_ids
+            new_manufacturer_data = {
+                k: v for k, v in manufacturer_data.items() if k not in exclude_ids
             }
         else:
-            manufacturer_data_set = set(manufacturer_data.items())
-        self._last_manufacturer_data_set_by_source[source] = manufacturer_data_set
+            new_manufacturer_data = manufacturer_data
 
-        if not last_manufacturer_data_set:
+        self._last_manufacturer_data_by_source[source] = manufacturer_data
+
+        if not last_manufacturer_data:
             # If there is no previous data and there is only one value
             # return it
             return (
-                dict(manufacturer_data_set) if len(manufacturer_data_set) == 1 else {}
+                new_manufacturer_data.copy() if len(new_manufacturer_data) == 1 else {}
             )
 
-        return dict(manufacturer_data_set - last_manufacturer_data_set)
+        return dict(new_manufacturer_data.items() - last_manufacturer_data.items())
 
     @abstractmethod
     def _start_update(self, data: BluetoothServiceInfo) -> None:
