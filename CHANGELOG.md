@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.0 (2024-05-23)
+
+### Feature
+
+* Refactor changed_manufacturer_data to improve performance ([#19](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/19)) ([`b300845`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/b300845c82b4d62f941b5e589663fdb67b760d3f))
+
 ## v1.6.2 (2023-07-07)
 
 ### Fix

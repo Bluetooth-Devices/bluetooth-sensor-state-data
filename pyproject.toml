@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bluetooth-sensor-state-data"
-version = "1.6.2"
+version = "1.7.0"
 description = "Models for storing and converting Bluetooth Sensor State Data"
 authors = ["J. Nick Koston <nick@koston.org>"]
 license = "Apache Software License 2.0"
