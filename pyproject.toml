@@ -3,7 +3,6 @@ name = "bluetooth-sensor-state-data"
 version = "1.7.0"
 description = "Models for storing and converting Bluetooth Sensor State Data"
 authors = ["J. Nick Koston <nick@koston.org>"]
-license = "Apache Software License 2.0"
 readme = "README.md"
 repository = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data"
 documentation = "https://bluetooth-sensor-state-data.readthedocs.io"
@@ -13,6 +12,7 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
+    "License :: OSI Approved :: Apache Software License",
 ]
 packages = [
     { include = "bluetooth_sensor_state_data", from = "src" },
