@@ -1,26 +1,30 @@
-[tool.poetry]
+[project]
 name = "bluetooth-sensor-state-data"
 version = "1.7.1"
+license = "Apache-2.0"
 description = "Models for storing and converting Bluetooth Sensor State Data"
-authors = ["J. Nick Koston <nick@koston.org>"]
+authors = [{ name = "J. Nick Koston", email = "nick@koston.org" }]
 readme = "README.md"
-repository = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data"
-documentation = "https://bluetooth-sensor-state-data.readthedocs.io"
+requires-python = ">=3.9"
+dynamic = ["classifiers", "dependencies", "optional-dependencies"]
+
+[project.urls]
+"Repository" = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data"
+"Documentation" = "https://bluetooth-sensor-state-data.readthedocs.io"
+"Bug Tracker" = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data/issues"
+"Changelog" = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data/blob/main/CHANGELOG.md"
+
+[tool.poetry]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries",
-    "License :: OSI Approved :: Apache Software License",
 ]
 packages = [
     { include = "bluetooth_sensor_state_data", from = "src" },
 ]
-
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data/issues"
-"Changelog" = "https://github.com/bluetooth-devices/bluetooth-sensor-state-data/blob/main/CHANGELOG.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -45,7 +49,7 @@ pytest-cov = "^6.0"
 
 [tool.semantic_release]
 branch = "main"
-version_toml = "pyproject.toml:tool.poetry.version"
+version_toml = "pyproject.toml:project.version"
 version_variable = "src/bluetooth_sensor_state_data/__init__.py:__version__"
 build_command = "pip install poetry && poetry build"
 
@@ -92,5 +96,5 @@ module = "docs.*"
 ignore_errors = true
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
