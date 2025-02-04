@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v1.7.2 (2025-02-04)
+
+### Fix
+
+* Update poetry to v2 + add license to metadata ([#50](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/issues/50)) ([`46a0420`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/46a04207678f6733e661ce079aeea4054fcbc958))
+
 ## v1.7.1 (2024-06-24)
 
 ### Fix
