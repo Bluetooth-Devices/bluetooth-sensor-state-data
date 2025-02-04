@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.7.4 (2025-02-04)
+
+### Bug Fixes
+
+- Add trusted publisher to PyPI
+  ([`ba01cdc`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/ba01cdccac2cc5cc7aa5a6e9555b4be8f66f2d59))
+
+
 ## v1.7.3 (2025-02-04)
 
 ### Bug Fixes
