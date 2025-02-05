@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v1.7.5 (2025-02-05)
+
+### Bug Fixes
+
+- Semantic_release version update
+  ([#52](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/52),
+  [`2262292`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/2262292d6705c6fd1c74cb375bf63d53628e048c))
+
+
 ## v1.7.4 (2025-02-04)
 
 ### Bug Fixes
