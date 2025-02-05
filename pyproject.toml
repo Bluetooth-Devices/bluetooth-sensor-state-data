@@ -50,7 +50,7 @@ pytest-cov = "^6.0"
 
 [tool.semantic_release]
 branch = "main"
-version_toml = ["pyproject.toml:tool.poetry.version"]
+version_toml = ["pyproject.toml:project.version"]
 version_variables = ["src/bluetooth_sensor_state_data/__init__.py:__version__"]
 build_command = "pip install poetry && poetry build"
 
