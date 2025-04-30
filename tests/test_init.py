@@ -2,8 +2,7 @@ from uuid import UUID
 
 from bleak.backends.device import BLEDevice
 from bluetooth_data_tools import monotonic_time_coarse
-from habluetooth import BluetoothServiceInfoBleak
-from home_assistant_bluetooth import BluetoothServiceInfo
+from habluetooth import BluetoothServiceInfo, BluetoothServiceInfoBleak
 
 from bluetooth_sensor_state_data import BluetoothData
 
