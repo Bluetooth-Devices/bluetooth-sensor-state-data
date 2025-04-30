@@ -789,3 +789,4 @@ def test_changed_manufacturer_data_raw():
     data = BluetoothData()
     assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
     assert data.changed_manufacturer_data(service_info, {39428}) == {}
+    assert data.changed_manufacturer_data(service_info) == {39428: b"\xc9\xa5F"}
