@@ -1,6 +1,45 @@
+from uuid import UUID
+
+from bleak.backends.device import BLEDevice
+from bluetooth_data_tools import monotonic_time_coarse
+from habluetooth import BluetoothServiceInfoBleak
 from home_assistant_bluetooth import BluetoothServiceInfo
 
 from bluetooth_sensor_state_data import BluetoothData
+
+
+def make_bluetooth_service_info(  # noqa: PLR0913
+    name: str,
+    manufacturer_data: dict[int, bytes],
+    service_uuids: list[str],
+    address: str,
+    rssi: int,
+    service_data: dict[UUID, bytes],
+    source: str,
+    tx_power: int = 0,
+    raw: bytes | None = None,
+) -> BluetoothServiceInfoBleak:
+    return BluetoothServiceInfoBleak(
+        name=name,
+        manufacturer_data=manufacturer_data,
+        service_uuids=service_uuids,
+        address=address,
+        rssi=rssi,
+        service_data=service_data,
+        source=source,
+        device=BLEDevice(
+            name=name,
+            address=address,
+            details={},
+            rssi=rssi,
+        ),
+        time=monotonic_time_coarse(),
+        advertisement=None,
+        connectable=True,
+        tx_power=tx_power,
+        raw=raw,
+    )
+
 
 SERVICE_INFO_1 = BluetoothServiceInfo(
     name="SensorPush HTP.xw 241",
@@ -734,3 +773,20 @@ def test_changed_manufacturer_data_with_exclude():
 
     third_data = data.changed_manufacturer_data(SERVICE_INFO_WITH_EXCLUDE_3, {2})
     assert third_data == {}
+
+
+def test_changed_manufacturer_data_raw():
+    service_info = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={1: b""},  # anything here
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=b"\x06\xff\x04\x9a\xc9\xa5\x46",
+    )
+
+    data = BluetoothData()
+    assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
+    assert data.changed_manufacturer_data(service_info, {39428}) == {}

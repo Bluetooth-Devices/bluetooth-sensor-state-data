@@ -4,7 +4,8 @@ __version__ = "1.7.5"
 
 from abc import abstractmethod
 
-from home_assistant_bluetooth import BluetoothServiceInfo
+from bluetooth_data_tools import parse_advertisement_data_bytes
+from habluetooth import BluetoothServiceInfo, BluetoothServiceInfoBleak
 from sensor_state_data import DeviceClass, SensorData, SensorUpdate, Units
 
 SIGNAL_STRENGTH_KEY = DeviceClass.SIGNAL_STRENGTH.value
@@ -21,13 +22,30 @@ class BluetoothData(SensorData):
         self._last_manufacturer_data_by_source: dict[str, dict[int, bytes]] = {}
 
     def changed_manufacturer_data(
-        self, data: BluetoothServiceInfo, exclude_ids: set[int] | None = None
+        self,
+        data: BluetoothServiceInfo | BluetoothServiceInfoBleak,
+        exclude_ids: set[int] | None = None,
     ) -> dict[int, bytes]:
         """Find changed manufacturer data.
 
         This function is not re-entrant. It must only
         be called once per update.
         """
+        if hasattr(data, "raw") and data.raw:
+            # If we have the raw data we don't need to work out
+            # which one is the newest.
+            _, _, _, changed_manufacturer_data, _ = parse_advertisement_data_bytes(
+                data.raw
+            )
+            if exclude_ids:
+                # If there are specific manufacturer data IDs to exclude,
+                # then remove them from the set of manufacturer data.
+                return {
+                    k: v
+                    for k, v in changed_manufacturer_data.items()
+                    if k not in exclude_ids
+                }
+            return changed_manufacturer_data
         manufacturer_data = data.manufacturer_data
         source = data.source
         last_manufacturer_data = self._last_manufacturer_data_by_source.get(source)
@@ -53,15 +71,19 @@ class BluetoothData(SensorData):
         return dict(new_manufacturer_data.items() - last_manufacturer_data.items())
 
     @abstractmethod
-    def _start_update(self, data: BluetoothServiceInfo) -> None:
+    def _start_update(
+        self, data: BluetoothServiceInfo | BluetoothServiceInfoBleak
+    ) -> None:
         """Update the data."""
 
-    def supported(self, data: BluetoothServiceInfo) -> bool:
+    def supported(self, data: BluetoothServiceInfo | BluetoothServiceInfoBleak) -> bool:
         """Return True if the device is supported."""
         self._start_update(data)
         return bool(self._device_id_to_type)
 
-    def update(self, data: BluetoothServiceInfo) -> SensorUpdate:
+    def update(
+        self, data: BluetoothServiceInfo | BluetoothServiceInfoBleak
+    ) -> SensorUpdate:
         """Update a device."""
         # Ensure events from previous
         # updates are not carried over
