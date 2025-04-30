@@ -1,6 +1,91 @@
 # CHANGELOG
 
 
+## v1.8.0 (2025-04-30)
+
+### Chores
+
+- **ci**: Bump the github-actions group with 2 updates
+  ([#56](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/56),
+  [`e0230f4`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/e0230f44f8e3150734000fda16029fddcf172964))
+
+- **deps**: Bump jinja2 from 3.1.5 to 3.1.6
+  ([#62](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/62),
+  [`7fbf2bc`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/7fbf2bc0ae082f87ee334d1bf183c1e6ec2f242e))
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps**: Bump sphinx from 6.2.1 to 7.4.7
+  ([#61](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/61),
+  [`9a015ff`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/9a015ff007878d50ef0701ee432529894544e147))
+
+- **deps-dev**: Bump pytest from 8.3.4 to 8.3.5
+  ([#60](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/60),
+  [`c7fd5bc`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/c7fd5bcb547aea1b5af6066a1b1b11470c4064bf))
+
+- **deps-dev**: Bump pytest-cov from 6.0.0 to 6.1.1
+  ([#59](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/59),
+  [`908f4cf`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/908f4cfd86b490a652abb6ffe0859147148cb765))
+
+Bumps [pytest-cov](https://github.com/pytest-dev/pytest-cov) from 6.0.0 to 6.1.1. -
+  [Changelog](https://github.com/pytest-dev/pytest-cov/blob/master/CHANGELOG.rst) -
+  [Commits](https://github.com/pytest-dev/pytest-cov/compare/v6.0.0...v6.1.1)
+
+--- updated-dependencies: - dependency-name: pytest-cov dependency-version: 6.1.1
+
+dependency-type: direct:development
+
+update-type: version-update:semver-minor ...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#53](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/53),
+  [`24c8dce`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/24c8dce7c2eb7a9c4e8fe49230cf09536a6c1e5e))
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#54](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/54),
+  [`4f94677`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/4f94677f89a00ca95d229b409f9560fa71a0fb73))
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#55](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/55),
+  [`424183b`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/424183be8cffa39c2abcb1aa95f2cef478d0dc51))
+
+updates: - [github.com/commitizen-tools/commitizen: v4.2.1 →
+  v4.4.1](https://github.com/commitizen-tools/commitizen/compare/v4.2.1...v4.4.1) -
+  [github.com/PyCQA/isort: 6.0.0 → 6.0.1](https://github.com/PyCQA/isort/compare/6.0.0...6.0.1) -
+  [github.com/PyCQA/flake8: 7.1.2 → 7.2.0](https://github.com/PyCQA/flake8/compare/7.1.2...7.2.0)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#57](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/57),
+  [`4cc9ca6`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/4cc9ca66891482469428c1cc0db6adfbe4e81c8e))
+
+updates: - [github.com/commitizen-tools/commitizen: v4.4.1 →
+  v4.5.0](https://github.com/commitizen-tools/commitizen/compare/v4.4.1...v4.5.0)
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#58](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/58),
+  [`ce99dfc`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/ce99dfc0af80a5bc527183a6bc18a168311668c1))
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+### Features
+
+- Add raw support to changed_manufacturer_data
+  ([#63](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/63),
+  [`cb873c9`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/cb873c9e734ed013076af39a5ffaeeb812ed5fbc))
+
+
 ## v1.7.5 (2025-02-05)
 
 ### Bug Fixes
@@ -128,9 +213,7 @@ Bumps [sphinx-rtd-theme](https://github.com/readthedocs/sphinx_rtd_theme) from 2
 
 --- updated-dependencies: - dependency-name: sphinx-rtd-theme dependency-type: direct:production
 
-update-type: version-update:semver-major
-
-...
+update-type: version-update:semver-major ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
