@@ -40,12 +40,16 @@ class BluetoothData(SensorData):
             if exclude_ids:
                 # If there are specific manufacturer data IDs to exclude,
                 # then remove them from the set of manufacturer data.
-                return {
+                changed_manufacturer_data = {
                     k: v
                     for k, v in changed_manufacturer_data.items()
                     if k not in exclude_ids
                 }
-            return changed_manufacturer_data
+            # If we can't work out the changed manufacturer data
+            # fall back to the normal method.
+            if changed_manufacturer_data:
+                return changed_manufacturer_data
+
         manufacturer_data = data.manufacturer_data
         source = data.source
         last_manufacturer_data = self._last_manufacturer_data_by_source.get(source)
@@ -60,13 +64,12 @@ class BluetoothData(SensorData):
             new_manufacturer_data = manufacturer_data
 
         self._last_manufacturer_data_by_source[source] = manufacturer_data
+        single_manufacturer_data = len(new_manufacturer_data) == 1
 
-        if not last_manufacturer_data:
+        if not last_manufacturer_data or single_manufacturer_data:
             # If there is no previous data and there is only one value
             # return it
-            return (
-                new_manufacturer_data.copy() if len(new_manufacturer_data) == 1 else {}
-            )
+            return new_manufacturer_data if single_manufacturer_data else {}
 
         return dict(new_manufacturer_data.items() - last_manufacturer_data.items())
 

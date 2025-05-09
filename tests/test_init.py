@@ -771,7 +771,7 @@ def test_changed_manufacturer_data_with_exclude():
     assert second_data == {1: b"\x00\x00,\x11\x00\x00m\xd3\x11\x01\x12\x01"}
 
     third_data = data.changed_manufacturer_data(SERVICE_INFO_WITH_EXCLUDE_3, {2})
-    assert third_data == {}
+    assert third_data == {1: b"\x00\x00,\x11\x00\x00m\xd3\x11\x01\x12\x01"}
 
 
 def test_changed_manufacturer_data_raw():
@@ -784,6 +784,42 @@ def test_changed_manufacturer_data_raw():
         rssi=-60,
         source="local",
         raw=b"\x06\xff\x04\x9a\xc9\xa5\x46",
+    )
+
+    data = BluetoothData()
+    assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
+    assert data.changed_manufacturer_data(service_info, {39428}) == {1: b""}
+    assert data.changed_manufacturer_data(service_info) == {39428: b"\xc9\xa5F"}
+
+
+def test_changed_manufacturer_data_raw_multiple():
+    service_info = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={1: b"", 2: b""},  # anything here
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=b"\x06\xff\x04\x9a\xc9\xa5\x46",
+    )
+
+    data = BluetoothData()
+    assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
+    assert data.changed_manufacturer_data(service_info, {39428}) == {}
+    assert data.changed_manufacturer_data(service_info) == {39428: b"\xc9\xa5F"}
+
+
+def test_single_changed_manufacturer_data_raw():
+    service_info = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={39428: b"\xc9\xa5F"},
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=b"\x06",
     )
 
     data = BluetoothData()
