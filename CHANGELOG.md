@@ -1,6 +1,35 @@
 # CHANGELOG
 
 
+## v1.9.0 (2025-05-09)
+
+### Chores
+
+- **deps**: Bump habluetooth from 3.45.0 to 3.48.2
+  ([#64](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/64),
+  [`eac0c17`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/eac0c17da43aa7bd3b87a079286a6ce6cfaf72f7))
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **deps**: Bump myst-parser from 3.0.1 to 4.0.1
+  ([#65](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/65),
+  [`3a72cda`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/3a72cdaff5d68cf4abb732adf8589f88e62873d4))
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **pre-commit.ci**: Pre-commit autoupdate
+  ([#66](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/66),
+  [`79198f2`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/79198f2703022932fcf1854f3ac9aca29aa147f2))
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+
+### Features
+
+- Improve change_manufacturer_data to fallback to history when raw is missing data
+  ([#67](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/pull/67),
+  [`4be53c5`](https://github.com/Bluetooth-Devices/bluetooth-sensor-state-data/commit/4be53c5032a25a1c14b9b2065ecfeba3bc8706d8))
+
+
 ## v1.8.0 (2025-04-30)
 
 ### Chores
