@@ -48,6 +48,12 @@ class BluetoothData(SensorData):
             # If we can't work out the changed manufacturer data
             # fall back to the normal method.
             if changed_manufacturer_data:
+                # Keep the per-source cache current so a subsequent
+                # non-raw advertisement diffs against this update's
+                # state rather than a stale earlier snapshot.
+                self._last_manufacturer_data_by_source[data.source] = (
+                    data.manufacturer_data
+                )
                 return changed_manufacturer_data
 
         manufacturer_data = data.manufacturer_data

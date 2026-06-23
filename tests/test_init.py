@@ -826,3 +826,54 @@ def test_single_changed_manufacturer_data_raw():
     assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
     assert data.changed_manufacturer_data(service_info, {39428}) == {}
     assert data.changed_manufacturer_data(service_info) == {39428: b"\xc9\xa5F"}
+
+
+def test_raw_path_keeps_cache_fresh_for_later_non_raw():
+    """A raw advertisement must refresh the per-source cache.
+
+    If the raw fast-path returns without updating the cache, a later
+    non-raw advertisement diffs against a stale snapshot and re-reports
+    a change that already happened on the raw update.
+    """
+    data = BluetoothData()
+
+    # Seed the cache via a plain non-raw advertisement (raw=None).
+    seed = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={1: b"old", 2: b"keep"},
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=None,
+    )
+    assert data.changed_manufacturer_data(seed) == {}
+
+    # A raw advertisement carrying updated manufacturer_data. The raw
+    # fast-path returns the parsed change and must also refresh the cache.
+    raw_update = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={1: b"new", 2: b"keep"},
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=b"\x06\xff\x04\x9a\xc9\xa5\x46",
+    )
+    assert data.changed_manufacturer_data(raw_update) == {39428: b"\xc9\xa5F"}
+
+    # A following non-raw advertisement with the SAME manufacturer_data as
+    # the raw update must report no change — nothing moved since.
+    follow_up = make_bluetooth_service_info(
+        name="SensorPush HT.w 0CA1",
+        manufacturer_data={1: b"new", 2: b"keep"},
+        service_data={},
+        service_uuids=["ef090000-11d6-42ba-93b8-9dd7ec090ab0"],
+        address="aa:bb:cc:dd:ee:ff",
+        rssi=-60,
+        source="local",
+        raw=None,
+    )
+    assert data.changed_manufacturer_data(follow_up) == {}
