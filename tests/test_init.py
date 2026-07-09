@@ -826,3 +826,38 @@ def test_single_changed_manufacturer_data_raw():
     assert data.changed_manufacturer_data(service_info, {2}) == {39428: b"\xc9\xa5F"}
     assert data.changed_manufacturer_data(service_info, {39428}) == {}
     assert data.changed_manufacturer_data(service_info) == {39428: b"\xc9\xa5F"}
+
+
+def _multi_source_info(source: str, value_2: bytes) -> BluetoothServiceInfo:
+    # Two manufacturer IDs so the single-value shortcut is not taken and the
+    # diff path against the per-source cache is exercised.
+    return BluetoothServiceInfo(
+        name="xBBQ",
+        address="61DE521B-F0BF-9F44-64D4-75BBE1738105",
+        rssi=-63,
+        service_data={},
+        source=source,
+        manufacturer_data={1: b"\x01\x01\x01", 2: value_2},
+        service_uuids=["0000fff0-0000-1000-8000-00805f9b34fb"],
+    )
+
+
+def test_changed_manufacturer_data_is_isolated_per_source():
+    # The same device seen through two scanners must keep independent history.
+    # A change on one source must not be masked by an interleaved ad from the
+    # other — which is exactly what would happen if the cache were a single
+    # field instead of keyed by data.source.
+    b0 = b"\x02\x00\x00"
+    b1 = b"\x02\x11\x11"
+    data = BluetoothData()
+
+    # First sighting on each source: no prior history, nothing changed yet.
+    assert data.changed_manufacturer_data(_multi_source_info("aaaa", b0)) == {}
+    assert data.changed_manufacturer_data(_multi_source_info("bbbb", b1)) == {}
+
+    # Source "aaaa" now advertises b1. Relative to aaaa's own last value (b0)
+    # this IS a change and must be reported — even though "bbbb" already sent b1.
+    assert data.changed_manufacturer_data(_multi_source_info("aaaa", b1)) == {2: b1}
+
+    # Source "bbbb" repeats b1: unchanged for bbbb, so nothing is reported.
+    assert data.changed_manufacturer_data(_multi_source_info("bbbb", b1)) == {}
