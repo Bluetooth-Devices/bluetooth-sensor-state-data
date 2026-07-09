@@ -30,7 +30,6 @@ def make_bluetooth_service_info(  # noqa: PLR0913
             name=name,
             address=address,
             details={},
-            rssi=rssi,
         ),
         time=monotonic_time_coarse(),
         advertisement=None,
