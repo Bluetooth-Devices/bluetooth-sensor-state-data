@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/bluetooth-devices/bluetooth-sensor-state-data/actions?query=workflow%3ACI">
-    <img src="https://img.shields.io/github/workflow/status/bluetooth-devices/bluetooth-sensor-state-data/CI/main?label=CI&logo=github&style=flat-square" alt="CI Status" >
+    <img src="https://img.shields.io/github/actions/workflow/status/bluetooth-devices/bluetooth-sensor-state-data/ci.yml?branch=main&label=CI&logo=github&style=flat-square" alt="CI Status" >
   </a>
   <a href="https://bluetooth-sensor-state-data.readthedocs.io">
     <img src="https://img.shields.io/readthedocs/bluetooth-sensor-state-data.svg?logo=read-the-docs&logoColor=fff&style=flat-square" alt="Documentation Status">
@@ -37,6 +37,58 @@ Models for storing and converting Bluetooth Sensor State Data
 Install this via pip (or your favourite package manager):
 
 `pip install bluetooth-sensor-state-data`
+
+## Usage
+
+This library provides `BluetoothData`, a base class that parser libraries
+subclass to turn a Bluetooth advertisement into a `SensorUpdate`. Subclasses
+implement `_start_update`, which inspects the advertisement and records sensor
+values via the helpers inherited from `sensor_state_data.SensorData`
+(`update_sensor`, `update_predefined_sensor`, `update_binary_sensor`, …).
+
+```python
+from bluetooth_sensor_state_data import BluetoothData
+from habluetooth import BluetoothServiceInfo, BluetoothServiceInfoBleak
+from sensor_state_data import DeviceClass, SensorUpdate, Units
+
+
+class MySensor(BluetoothData):
+    def _start_update(
+        self, data: BluetoothServiceInfo | BluetoothServiceInfoBleak
+    ) -> None:
+        if 0x1234 not in data.manufacturer_data:
+            return  # not our device — leave the update empty
+        self.set_device_type("My Sensor")
+        payload = data.manufacturer_data[0x1234]
+        self.update_sensor(
+            key="temperature",
+            native_unit_of_measurement=Units.TEMPERATURE_CELSIUS,
+            native_value=payload[0],
+            device_class=DeviceClass.TEMPERATURE,
+        )
+
+
+parser = MySensor()
+service_info: BluetoothServiceInfo = ...  # from the Bluetooth stack
+
+if parser.supported(service_info):
+    update: SensorUpdate = parser.update(service_info)
+```
+
+Key methods:
+
+- **`supported(data) -> bool`** — runs `_start_update` and returns `True` when
+  the advertisement was recognised as a supported device.
+- **`update(data) -> SensorUpdate`** — clears transient events from the previous
+  advertisement, runs `_start_update`, records the signal strength from
+  `data.rssi`, and returns the finished `SensorUpdate`.
+- **`changed_manufacturer_data(data, exclude_ids=None) -> dict[int, bytes]`** —
+  returns only the manufacturer data that changed since the previous
+  advertisement **from the same source** (state is tracked per `data.source`, so
+  multiple scanners don't clobber each other). Pass `exclude_ids` to ignore
+  specific manufacturer IDs. When the advertisement carries a single
+  manufacturer ID it is always returned; when several IDs arrive with no prior
+  baseline the result is empty, because the changed entry can't be identified.
 
 ## Contributors ✨
 
