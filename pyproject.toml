@@ -44,7 +44,7 @@ docs = [
     "sphinx-rtd-theme",
 ]
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^8.4"
 pytest-cov = "^7.0"
 
