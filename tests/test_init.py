@@ -1,10 +1,17 @@
-from uuid import UUID
-
 from bleak.backends.device import BLEDevice
 from bluetooth_data_tools import monotonic_time_coarse
 from habluetooth import BluetoothServiceInfo, BluetoothServiceInfoBleak
 
-from bluetooth_sensor_state_data import BluetoothData
+from bluetooth_sensor_state_data import BluetoothData as _BluetoothData
+
+
+class BluetoothData(_BluetoothData):
+    """Concrete BluetoothData; the base class leaves _start_update abstract."""
+
+    def _start_update(
+        self, data: BluetoothServiceInfo | BluetoothServiceInfoBleak
+    ) -> None:
+        """Parse nothing; these tests only exercise base-class behavior."""
 
 
 def make_bluetooth_service_info(  # noqa: PLR0913
@@ -13,7 +20,7 @@ def make_bluetooth_service_info(  # noqa: PLR0913
     service_uuids: list[str],
     address: str,
     rssi: int,
-    service_data: dict[UUID, bytes],
+    service_data: dict[str, bytes],
     source: str,
     tx_power: int = 0,
     raw: bytes | None = None,
