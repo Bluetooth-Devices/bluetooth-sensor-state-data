@@ -7,6 +7,9 @@ on:
     # Run on the 1st of November to revert
     - cron: "0 13 1 11 *"
 
+# The labeler authenticates with GH_PAT; the default token is unused.
+permissions: {}
+
 jobs:
   hacktoberfest:
     runs-on: ubuntu-latest
