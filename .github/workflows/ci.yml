@@ -10,6 +10,10 @@ concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
+# Least privilege by default; the release job opts into the scopes it needs.
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -25,6 +29,9 @@ jobs:
   commitlint:
     name: Lint Commit Messages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v6
         with:
