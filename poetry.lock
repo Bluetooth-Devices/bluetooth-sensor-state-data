@@ -125,14 +125,14 @@ docs = ["Sphinx (>=5,<8)", "myst-parser (>=0.18,<3.1)", "sphinx-rtd-theme (>=1,<
 
 [[package]]
 name = "bluetooth-auto-recovery"
-version = "1.5.1"
+version = "1.6.4"
 description = "Recover bluetooth adapters that are in an stuck state"
 optional = false
-python-versions = "<3.14,>=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "bluetooth_auto_recovery-1.5.1-py3-none-any.whl", hash = "sha256:59751902004cad9a84b5a674b051113d0a653374c1cec271945f2862b2b15c8f"},
-    {file = "bluetooth_auto_recovery-1.5.1.tar.gz", hash = "sha256:16eaa20e3f86cb2818ce75d107f57534559cdd82ba015b2741667bcac929d506"},
+    {file = "bluetooth_auto_recovery-1.6.4-py3-none-any.whl", hash = "sha256:39485c41e17a2d4887c1fbf04b4e2fd37f0f3c7898db388753e026ca3addf055"},
+    {file = "bluetooth_auto_recovery-1.6.4.tar.gz", hash = "sha256:c69a9f3b5e00239ab005d808aa5e7afa3c36a82f86e9531b6c7682bde1bc3ecc"},
 ]
 
 [package.dependencies]
@@ -1860,5 +1860,5 @@ docs = ["Sphinx", "myst-parser", "sphinx-rtd-theme"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.11,<3.14"
-content-hash = "ef2ee4dc9ad4d515b2ca42ff5de2ca7cea697996db6d299be072e51164f16543"
+python-versions = ">=3.11,<3.15"
+content-hash = "c9ddf34f7a07c93ffffad033ec637d8c7e3b03a0ca7b51a08dfe02bbf6e6a21c"
