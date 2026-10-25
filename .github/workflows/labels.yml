@@ -7,6 +7,10 @@ on:
     paths:
       - ".github/**"
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   labels:
     runs-on: ubuntu-latest
@@ -16,7 +20,26 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-      - name: Install labels
-        run: pip install labels
+      # Create or update every label in labels.toml. Labels missing from
+      # the file are left alone (e.g. dependabot's "python" label).
       - name: Sync config with Github
-        run: labels -u ${{ github.repository_owner }} -t ${{ secrets.GITHUB_TOKEN }} sync -f .github/labels.toml
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: python
+        run: |
+          import subprocess
+          import tomllib
+
+          with open(".github/labels.toml", "rb") as f:
+              labels = tomllib.load(f)
+          for label in labels.values():
+              subprocess.run(
+                  [
+                      "gh", "label", "create", label["name"],
+                      "--color", label["color"],
+                      "--description", label["description"],
+                      "--force",
+                  ],
+                  check=True,
+              )
