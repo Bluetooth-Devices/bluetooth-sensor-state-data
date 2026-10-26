@@ -45,7 +45,7 @@ docs = [
 ]
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^9.0"
+pytest = "^9.1"
 pytest-cov = "^7.0"
 
 
